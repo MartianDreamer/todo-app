@@ -27,7 +27,6 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
     "bg-orange-200",
     "bg-red-200",
   ];
-  console.log(entry);
   return (
     <div
       className={
