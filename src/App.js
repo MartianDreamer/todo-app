@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col pt-4 pl-24 pr-24">
+    <div className="flex flex-col pt-4 pl-48 pr-48 w-11/12">
       <ControlCenter setDisplayInput={setDisplayInput} />
       <Input
         username="sang"
