@@ -8,6 +8,7 @@ import ControlCenter from "./components/controlcenter";
 import DangerousDialog from "./components/confirmdlg";
 
 function App() {
+  const [bgColor, setBgColor] = useState(250);
   const [displayInput, setDisplayInput] = useState("none");
   const [displayDlg, setDisplayDlg] = useState("none");
   const [isDeletable, setDeletable] = useState(false);
@@ -41,15 +42,22 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col pt-4 pl-48 pr-48 w-11/12">
+    <div
+      className="flex flex-col pt-4 pl-64 pr-64 w-full h-screen"
+      style={{
+        backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
+      }}
+    >
       <ControlCenter
         setDisplayInput={setDisplayInput}
         setData={setData}
         data={data}
+        bgColor={bgColor}
+        setBgColor={setBgColor}
       />
       <Input
         username="sang"
-        bgColor={250}
+        bgColor={bgColor}
         display={displayInput}
         setDisplay={setDisplayInput}
         data={data}
@@ -61,18 +69,19 @@ function App() {
         setDisplayDlg={setDisplayDlg}
       />
       <DangerousDialog
-        bgColor={250}
+        bgColor={bgColor}
         display={displayDlg}
         handleConfirm={handleDlgConfirm}
         handleCancel={handleDlgCancel}
       >
-        Do you want to delete this todo item {todo.title} ?
+        Do you want to delete this todo item ({todo.title}) ?
       </DangerousDialog>
       <TodoTable
         data={data}
         setData={writeData}
         modifyTodo={modifyTodo}
         setDeletable={setDeletable}
+        bgColor={bgColor}
       />
     </div>
   );

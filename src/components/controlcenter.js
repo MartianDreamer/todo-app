@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { getData } from "../persistence";
 
-export default function ControlCenter({ setDisplayInput, setData }) {
+export default function ControlCenter({
+  setDisplayInput,
+  setData,
+  bgColor,
+  setBgColor,
+}) {
   const [searchInput, setSearchInput] = useState("");
   const [filter, setFilter] = useState({
     urgent: true,
@@ -51,7 +56,13 @@ export default function ControlCenter({ setDisplayInput, setData }) {
   };
 
   return (
-    <div className="mb-4 p-4 border-solid border-4 border-emerald-400 rounded-sm">
+    <div
+      className="mb-4 p-4 border-solid border-4 border-emerald-400 rounded-sm"
+      style={{
+        backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
+      }}
+    >
       <div>
         <input
           type="text"
@@ -147,10 +158,22 @@ export default function ControlCenter({ setDisplayInput, setData }) {
       </div>
       <div className="mt-2 flex justify-center">
         <button
-          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold"
+          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-2"
           onClick={() => setDisplayInput("block")}
         >
           Add
+        </button>
+        <button
+          className="w-2/12 bg-blue-500 h-6 hover:bg-blue-400 font-semibold"
+          onClick={() => {
+            if (bgColor === 250) {
+              setBgColor(30);
+            } else {
+              setBgColor(250)
+            }
+          }}
+        >
+          {bgColor === 30 ? "Bright Mode" : "Dark Mode"}
         </button>
       </div>
     </div>

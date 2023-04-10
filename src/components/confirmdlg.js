@@ -14,6 +14,7 @@ export default function DangerousDialog({
         display: display,
         left: "690px",
         top: "300px",
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
       }}
     >
       <p>{children}</p>

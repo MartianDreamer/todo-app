@@ -18,6 +18,7 @@ export default function Input({
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
         display: display,
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
       }}
     >
       <div className="mb-4">
