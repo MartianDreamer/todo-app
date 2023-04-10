@@ -1,6 +1,3 @@
-import { useState } from "react";
-import ContextMenu from "./contextmenu";
-
 export default function TodoTable({ data, setData, modifyTodo, setDeletable }) {
   return (
     <div className="grid grid-cols-1 w-10/12 border-solid border-4 rounded-lg border-emerald-400">
