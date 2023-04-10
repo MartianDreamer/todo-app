@@ -10,6 +10,7 @@ export default function Input({
   setTodo,
   isDeletable,
   setDeletable,
+  setDisplayDlg,
 }) {
   return (
     <div
@@ -78,7 +79,7 @@ export default function Input({
           onChange={() => setTodo({ ...todo, priority: 4 })}
           id="urgent"
         />
-        <label htmlFor="urgent" className="mr-3">
+        <label htmlFor="urgent" className="mr-3 text-red-600">
           Ugent
         </label>
         <input
@@ -90,7 +91,7 @@ export default function Input({
           onChange={() => setTodo({ ...todo, priority: 3 })}
           id="high"
         />
-        <label htmlFor="high" className="mr-3">
+        <label htmlFor="high" className="mr-3 text-orange-600">
           High
         </label>
         <input
@@ -102,7 +103,7 @@ export default function Input({
           onChange={() => setTodo({ ...todo, priority: 2 })}
           id="medium"
         />
-        <label htmlFor="medium" className="mr-3">
+        <label htmlFor="medium" className="mr-3 text-yellow-600">
           Medium
         </label>
         <input
@@ -114,17 +115,22 @@ export default function Input({
           onChange={() => setTodo({ ...todo, priority: 1 })}
           id="low"
         />
-        <label htmlFor="low" className="mr-3">
+        <label htmlFor="low" className="mr-3 text-green-600">
           Low
         </label>
       </div>
       <div className="flex justify-center mt-4">
         <button
-          className="bg-green-600 ppb-1 pl-2 pr-2 rounded-sm hover:bg-green-500 mr-2"
+          className="bg-green-600 pt-1 pb-1 pl-2 pr-2 rounded-sm hover:bg-green-500 mr-2"
           onClick={() => {
             if (data.find((e) => e.id === todo.id)) {
               setData([...data.filter((e) => e.id !== todo.id), todo]);
             } else {
+              if (data.length > 0) {
+                todo.id = Math.max(...data.map((e) => e.id)) + 1;
+              } else {
+                todo.id = 1;
+              }
               setData([...data, todo]);
             }
             setTodo(
@@ -137,15 +143,12 @@ export default function Input({
           Submit
         </button>
         <button
-          className="bg-red-600 ppb-1 pl-2 pr-2 rounded-sm hover:bg-red-500 mr-2"
+          className="bg-red-600 pt-1 pb-1 pl-2 pr-2 rounded-sm hover:bg-red-500 mr-2"
           style={{
             display: isDeletable ? "block" : "none",
           }}
           onClick={() => {
-            setData([...data.filter((e) => e.id !== todo.id)]);
-            setTodo(
-              new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)
-            );
+            setDisplayDlg("block");
             setDisplay("none");
             setDeletable(false);
           }}
@@ -153,7 +156,7 @@ export default function Input({
           Delete
         </button>
         <button
-          className="bg-yellow-600 ppb-1 pl-2 pr-2 rounded-sm hover:bg-yellow-500"
+          className="bg-yellow-600 pt-1 pb-1 pl-2 pr-2 rounded-sm hover:bg-yellow-500"
           onClick={() => {
             setTodo(
               new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)

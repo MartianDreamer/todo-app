@@ -22,10 +22,10 @@ export default function TodoTable({ data, setData, modifyTodo, setDeletable }) {
 
 function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
   const bgColor = [
-    "bg-green-200",
-    "bg-yellow-200",
-    "bg-orange-200",
-    "bg-red-200",
+    "bg-green-300",
+    "bg-yellow-300",
+    "bg-orange-300",
+    "bg-red-300",
   ];
   return (
     <div
