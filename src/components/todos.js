@@ -1,6 +1,11 @@
 export default function TodoTable({ data, setData, modifyTodo, setDeletable }) {
   return (
-    <div className="grid grid-cols-1 w-10/12 border-solid border-4 rounded-lg border-emerald-400">
+    <div
+      className={
+        (data.length > 0 ? "grid " : "hidden ") +
+        "grid-cols-1 w-full border-solid border-4 rounded-sm border-emerald-400"
+      }
+    >
       {data.map((e, i) => (
         <TodoEntry
           key={i}
@@ -25,7 +30,7 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
   return (
     <div
       className={
-        "justify-start m-2 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono " +
+        "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono " +
         bgColor[entry.priority - 1]
       }
       onDoubleClick={() => {

@@ -4,6 +4,7 @@ import Input from "./components/input";
 import { getData, saveData } from "./persistence";
 import TodoTable from "./components/todos";
 import Todo from "./type/todo";
+import ControlCenter from "./components/controlcenter";
 
 function App() {
   const [displayInput, setDisplayInput] = useState("none");
@@ -27,8 +28,8 @@ function App() {
   };
 
   return (
-    <div className="flex">
-      <button onClick={() => setDisplayInput("block")}>Input</button>
+    <div className="flex flex-col pt-4 pl-24 pr-24">
+      <ControlCenter setDisplayInput={setDisplayInput} />
       <Input
         username="sang"
         bgColor={250}

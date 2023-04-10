@@ -24,7 +24,7 @@ export default function Input({
           Title
         </label>
         <input
-          className="border-solid border-2 border-slate-400 rounded-md pl-2 w-full bg-inherit"
+          className="border-solid border-2 border-slate-400 rounded-md pl-1 w-full bg-inherit"
           id="title"
           type="text"
           value={todo.title}
@@ -40,7 +40,7 @@ export default function Input({
           rows="4"
           cols="50"
           value={todo.description}
-          className="border-solid border-2 border-slate-400 rounded-md pl-2 resize-none bg-inherit"
+          className="border-solid border-2 border-slate-400 rounded-md pl-1 resize-none bg-inherit"
           onChange={(e) => setTodo({ ...todo, description: e.target.value })}
         />
       </div>
@@ -49,7 +49,7 @@ export default function Input({
           Expired date
         </label>
         <input
-          className="border-solid border-2 border-slate-400 rounded-md pl-2 w-full bg-inherit"
+          className="border-solid border-2 border-slate-400 rounded-md pl-1 w-full bg-inherit"
           id="expiredAt"
           type="date"
           value={todo.expiredAt}
@@ -58,7 +58,7 @@ export default function Input({
       </div>
       <div className="mb-4 flex justify-center">
         <input
-          className="border-solid border-2 border-slate-400 rounded-md pl-2 bg-inherit mr-1"
+          className="border-solid border-2 border-slate-400 rounded-md bg-inherit mr-1"
           id="finished"
           type="checkbox"
           checked={todo.isDone}
