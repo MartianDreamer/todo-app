@@ -29,7 +29,11 @@ function App() {
 
   return (
     <div className="flex flex-col pt-4 pl-48 pr-48 w-11/12">
-      <ControlCenter setDisplayInput={setDisplayInput} />
+      <ControlCenter
+        setDisplayInput={setDisplayInput}
+        setData={setData}
+        data={data}
+      />
       <Input
         username="sang"
         bgColor={250}
