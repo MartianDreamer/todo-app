@@ -30,10 +30,13 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
   return (
     <div
       className={
-        "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono " +
+        "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer " +
         bgColor[entry.priority - 1]
       }
-      onDoubleClick={() => {
+      onDoubleClick={(e) => {
+        if (e.target.tagName === "INPUT") {
+          return;
+        }
         setDeletable(true);
         modifyTodo(entry);
       }}
