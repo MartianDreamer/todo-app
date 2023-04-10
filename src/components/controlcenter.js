@@ -12,9 +12,42 @@ export default function ControlCenter({ setDisplayInput, setData }) {
     notDone: true,
   });
 
-
   const handleFilter = (e) => {
-   console.log(e);
+    const newFilter = { ...filter };
+    newFilter[e.target.id] = e.target.checked;
+    setFilter(newFilter);
+    const data = filterIsDone(newFilter);
+    const result = filterPriority(data, newFilter);
+    setData(result);
+  };
+
+  const filterIsDone = (filterObj) => {
+    const data = getData();
+    const result = [];
+    if (filterObj.done) {
+      result.push(...data.filter((e) => e.isDone));
+    }
+    if (filterObj.notDone) {
+      result.push(...data.filter((e) => !e.isDone));
+    }
+    return result;
+  };
+
+  const filterPriority = (data, filterObj) => {
+    const result = [];
+    if (filterObj.urgent) {
+      result.push(...data.filter((e) => e.priority === 4));
+    }
+    if (filterObj.high) {
+      result.push(...data.filter((e) => e.priority === 3));
+    }
+    if (filterObj.medium) {
+      result.push(...data.filter((e) => e.priority === 2));
+    }
+    if (filterObj.low) {
+      result.push(...data.filter((e) => e.priority === 1));
+    }
+    return result;
   };
 
   return (
