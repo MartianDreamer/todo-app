@@ -27,6 +27,7 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
     "bg-orange-200",
     "bg-red-200",
   ];
+  console.log(entry);
   return (
     <div
       className={
@@ -50,7 +51,9 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
             setData(newData);
           }}
         />
-        <p className="italic text-sm ml-2">{entry.expiredAt}</p>
+        <p className="italic text-sm ml-2">
+          from {entry.createdAt.substring(0, 10)} to {entry.expiredAt}
+        </p>
       </div>
       <p className="text-sm">{entry.description}</p>
     </div>
