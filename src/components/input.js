@@ -18,7 +18,7 @@ export default function Input({
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
         display: display,
-        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)",
       }}
     >
       <div className="mb-4">
@@ -125,14 +125,14 @@ export default function Input({
           className="bg-green-600 pt-1 pb-1 pl-2 pr-2 rounded-sm hover:bg-green-500 mr-2"
           onClick={() => {
             if (data.find((e) => e.id === todo.id)) {
-              setData([...data.filter((e) => e.id !== todo.id), todo]);
+              setData([todo, ...data.filter((e) => e.id !== todo.id)]);
             } else {
               if (data.length > 0) {
                 todo.id = Math.max(...data.map((e) => e.id)) + 1;
               } else {
                 todo.id = 1;
               }
-              setData([...data, todo]);
+              setData([todo, ...data]);
             }
             setTodo(
               new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)

@@ -1,4 +1,5 @@
 function saveData(data) {
+  data.sort((a, b) => b.id - a.id);
   localStorage.setItem("todoData", JSON.stringify(data));
 }
 

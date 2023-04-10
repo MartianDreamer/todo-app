@@ -23,6 +23,7 @@ export default function ControlCenter({
     setFilter(newFilter);
     const data = filterIsDone(newFilter);
     const result = filterPriority(data, newFilter);
+    result.sort((a, b) => b.id - a.id);
     setData(result);
   };
 
@@ -60,7 +61,7 @@ export default function ControlCenter({
       className="mb-4 p-4 border-solid border-4 border-emerald-400 rounded-sm"
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
-        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)",
       }}
     >
       <div>
@@ -87,6 +88,7 @@ export default function ControlCenter({
                     .includes(searchInput.toLowerCase())
               ),
             ];
+            newData.sort((a, b) => b.id - a.id);
             setData(newData);
             setSearchInput("");
           }}
@@ -169,7 +171,7 @@ export default function ControlCenter({
             if (bgColor === 250) {
               setBgColor(30);
             } else {
-              setBgColor(250)
+              setBgColor(250);
             }
           }}
         >
