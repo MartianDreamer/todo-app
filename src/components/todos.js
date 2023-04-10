@@ -45,13 +45,13 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable }) {
           checked={entry.isDone}
           onChange={(e) => {
             const newData = [...data];
-            newData.find((e) => e.createdAt === entry.createdAt).isDone =
+            newData.find((e) => e.id === entry.id).isDone =
               e.target.checked;
             setData(newData);
           }}
         />
         <p className="italic text-sm ml-2">
-          from {entry.createdAt.substring(0, 10)} to {entry.expiredAt}
+          from {entry.createdAt} to {entry.expiredAt}
         </p>
       </div>
       <p className="text-sm">{entry.description}</p>

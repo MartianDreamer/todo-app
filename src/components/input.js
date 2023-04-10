@@ -122,11 +122,8 @@ export default function Input({
         <button
           className="bg-green-600 ppb-1 pl-2 pr-2 rounded-sm hover:bg-green-500 mr-2"
           onClick={() => {
-            if (data.find((e) => e.createdAt === todo.createdAt)) {
-              setData([
-                ...data.filter((e) => e.createdAt !== todo.createdAt),
-                todo,
-              ]);
+            if (data.find((e) => e.id === todo.id)) {
+              setData([...data.filter((e) => e.id !== todo.id), todo]);
             } else {
               setData([...data, todo]);
             }
@@ -145,7 +142,7 @@ export default function Input({
             display: isDeletable ? "block" : "none",
           }}
           onClick={() => {
-            setData([...data.filter((e) => e.createdAt !== todo.createdAt)]);
+            setData([...data.filter((e) => e.id !== todo.id)]);
             setTodo(
               new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)
             );
