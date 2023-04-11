@@ -81,7 +81,7 @@ export default function Input({
           id="urgent"
         />
         <label htmlFor="urgent" className="mr-3 text-red-600">
-          Ugent
+          Urgent
         </label>
         <input
           type="radio"

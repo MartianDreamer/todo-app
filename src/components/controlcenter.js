@@ -3,6 +3,7 @@ import { getData } from "../persistence";
 
 export default function ControlCenter({
   setDisplayInput,
+  data,
   setData,
   bgColor,
   setBgColor,
@@ -74,9 +75,16 @@ export default function ControlCenter({
         <button
           className="w-1/12 bg-green-500 h-6 hover:bg-green-400 font-semibold"
           onClick={(e) => {
-            const data = getData();
             if (searchInput === "") {
-              setData(data);
+              setFilter({
+                urgent: true,
+                high: true,
+                medium: true,
+                low: true,
+                done: true,
+                notDone: true,
+              });
+              setData(getData());
               return;
             }
             const newData = [

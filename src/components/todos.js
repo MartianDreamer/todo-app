@@ -13,7 +13,7 @@ export default function TodoTable({
       }
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
-        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)",
       }}
     >
       {data.map((e, i) => (
@@ -31,7 +31,14 @@ export default function TodoTable({
   );
 }
 
-function TodoEntry({ entry, data, setData, modifyTodo, setDeletable, bgColor }) {
+function TodoEntry({
+  entry,
+  data,
+  setData,
+  modifyTodo,
+  setDeletable,
+  bgColor,
+}) {
   const className = [
     "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer bg-green-300 hover:bg-green-200",
     "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer bg-yellow-300 hover:bg-yellow-200",
@@ -47,11 +54,13 @@ function TodoEntry({ entry, data, setData, modifyTodo, setDeletable, bgColor }) 
 
   return (
     <div
-      className={bgColor === 250 ? className[entry.priority - 1] : darkModeClassName[entry.priority - 1]}
-      onDoubleClick={(e) => {
-        if (e.target.tagName === "INPUT") {
-          return;
-        }
+      className={
+        bgColor === 250
+          ? className[entry.priority - 1]
+          : darkModeClassName[entry.priority - 1]
+      }
+      onContextMenu={(e) => {
+        e.preventDefault();
         setDeletable(true);
         modifyTodo(entry);
       }}
