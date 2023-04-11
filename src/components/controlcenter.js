@@ -7,6 +7,7 @@ export default function ControlCenter({
   setData,
   bgColor,
   setBgColor,
+  setDisplayDlg,
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [filter, setFilter] = useState({
@@ -57,6 +58,11 @@ export default function ControlCenter({
     return result;
   };
 
+  const searchButtonClassName =
+    searchInput !== ""
+      ? "w-1/12 bg-green-500 h-6 hover:bg-green-400 font-semibold"
+      : "w-1/12 bg-orange-500 h-6 hover:bg-orange-400 font-semibold";
+
   return (
     <div
       className="mb-4 p-4 border-solid border-4 border-emerald-400 rounded-sm"
@@ -73,7 +79,7 @@ export default function ControlCenter({
           onChange={(e) => setSearchInput(e.target.value)}
         />
         <button
-          className="w-1/12 bg-green-500 h-6 hover:bg-green-400 font-semibold"
+          className={searchButtonClassName}
           onClick={(e) => {
             if (searchInput === "") {
               setFilter({
@@ -101,7 +107,7 @@ export default function ControlCenter({
             setSearchInput("");
           }}
         >
-          Search
+          {searchInput !== "" ? "Search" : "Clear result"}
         </button>
       </div>
       <div className="mt-2 flex justify-center">
@@ -168,13 +174,13 @@ export default function ControlCenter({
       </div>
       <div className="mt-2 flex justify-center">
         <button
-          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-2"
+          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-4"
           onClick={() => setDisplayInput("block")}
         >
           Add
         </button>
         <button
-          className="w-2/12 bg-blue-500 h-6 hover:bg-blue-400 font-semibold"
+          className="w-2/12 bg-blue-500 h-6 hover:bg-blue-400 font-semibold mr-4"
           onClick={() => {
             if (bgColor === 250) {
               setBgColor(30);
@@ -184,6 +190,12 @@ export default function ControlCenter({
           }}
         >
           {bgColor === 30 ? "Bright Mode" : "Dark Mode"}
+        </button>
+        <button
+          className="w-2/12 bg-red-500 h-6 hover:bg-red-400 font-semibold mr-2"
+          onClick={() => setDisplayDlg("block")}
+        >
+          Delete All
         </button>
       </div>
     </div>

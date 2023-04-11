@@ -10,7 +10,8 @@ import DangerousDialog from "./components/confirmdlg";
 function App() {
   const [bgColor, setBgColor] = useState(250);
   const [displayInput, setDisplayInput] = useState("none");
-  const [displayDlg, setDisplayDlg] = useState("none");
+  const [displaySingleDeleteDlg, setSDDisplayDlg] = useState("none");
+  const [displayMultipleDeleteDlg, setMDDisplayDlg] = useState("none");
   const [isDeletable, setDeletable] = useState(false);
   const [todo, setTodo] = useState(
     new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)
@@ -33,12 +34,21 @@ function App() {
   const handleDlgConfirm = () => {
     writeData([...data.filter((e) => e.id !== todo.id)]);
     setTodo(new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1));
-    setDisplayDlg("none");
+    setSDDisplayDlg("none");
   };
 
   const handleDlgCancel = () => {
-    setDisplayDlg("none");
+    setSDDisplayDlg("none");
     setTodo(new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1));
+  };
+
+  const handleMultipleDeleteConfirm = () => {
+    writeData([...data.filter((e) => !e.isSelected)]);
+    setMDDisplayDlg("none");
+  };
+
+  const handleMultipleDeleteCancel = () => {
+    setMDDisplayDlg("none");
   };
 
   return (
@@ -54,6 +64,7 @@ function App() {
         data={data}
         bgColor={bgColor}
         setBgColor={setBgColor}
+        setDisplayDlg={setMDDisplayDlg}
       />
       <Input
         username="sang"
@@ -66,19 +77,28 @@ function App() {
         setTodo={setTodo}
         isDeletable={isDeletable}
         setDeletable={setDeletable}
-        setDisplayDlg={setDisplayDlg}
+        setDisplayDlg={setSDDisplayDlg}
       />
       <DangerousDialog
         bgColor={bgColor}
-        display={displayDlg}
+        display={displaySingleDeleteDlg}
         handleConfirm={handleDlgConfirm}
         handleCancel={handleDlgCancel}
       >
         Do you want to delete this todo item ({todo.title}) ?
       </DangerousDialog>
+      <DangerousDialog
+        bgColor={bgColor}
+        display={displayMultipleDeleteDlg}
+        handleConfirm={handleMultipleDeleteConfirm}
+        handleCancel={handleMultipleDeleteCancel}
+      >
+        Do you want to delete these items ?
+      </DangerousDialog>
       <TodoTable
         data={data}
-        setData={writeData}
+        writeData={writeData}
+        setData={setData}
         modifyTodo={modifyTodo}
         setDeletable={setDeletable}
         bgColor={bgColor}

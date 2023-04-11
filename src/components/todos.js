@@ -1,5 +1,6 @@
 export default function TodoTable({
   data,
+  writeData,
   setData,
   modifyTodo,
   setDeletable,
@@ -21,6 +22,7 @@ export default function TodoTable({
           key={i}
           entry={e}
           data={data}
+          writeData={writeData}
           setData={setData}
           modifyTodo={modifyTodo}
           setDeletable={setDeletable}
@@ -34,6 +36,7 @@ export default function TodoTable({
 function TodoEntry({
   entry,
   data,
+  writeData,
   setData,
   modifyTodo,
   setDeletable,
@@ -51,11 +54,15 @@ function TodoEntry({
     "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer bg-orange-600 hover:bg-orange-500",
     "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer bg-red-600 hover:bg-red-500",
   ];
+  const selectedClassName =
+    "justify-start m-1 border-2 rounded-sm border-solid border-indigo-300 text-left p-1 font-mono cursor-pointer bg-sky-600 hover:bg-sky-500";
 
   return (
     <div
       className={
-        bgColor === 250
+        entry.isSelected
+          ? selectedClassName
+          : bgColor === 250
           ? className[entry.priority - 1]
           : darkModeClassName[entry.priority - 1]
       }
@@ -63,6 +70,15 @@ function TodoEntry({
         e.preventDefault();
         setDeletable(true);
         modifyTodo(entry);
+      }}
+      onDoubleClick={(e) => {
+        if (e.target.tagName === "INPUT") {
+          return;
+        }
+        const newData = [...data];
+        const newEntry = newData.find((e) => e.id === entry.id);
+        newEntry.isSelected = !newEntry.isSelected;
+        setData(newData);
       }}
     >
       <h3 className="font-semibold">{entry.title}</h3>
@@ -73,7 +89,7 @@ function TodoEntry({
           onChange={(e) => {
             const newData = [...data];
             newData.find((e) => e.id === entry.id).isDone = e.target.checked;
-            setData(newData);
+            writeData(newData);
           }}
         />
         <p className="italic text-sm ml-2">
