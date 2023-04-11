@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div
-      className="flex flex-col pt-4 pl-64 pr-64 w-full h-screen"
+      className="flex flex-col pt-4 pl-96 pr-96 w-full h-screen"
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
       }}

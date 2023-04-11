@@ -1,3 +1,4 @@
+import { getData } from "../persistence";
 import Todo from "../type/todo";
 
 export default function Input({
@@ -78,9 +79,9 @@ export default function Input({
           className="mr-1"
           checked={todo.priority === 4}
           onChange={() => setTodo({ ...todo, priority: 4 })}
-          id="urgent"
+          id="urgentRadio"
         />
-        <label htmlFor="urgent" className="mr-3 text-red-600">
+        <label htmlFor="urgentRadio" className="mr-3 text-red-600">
           Urgent
         </label>
         <input
@@ -90,9 +91,9 @@ export default function Input({
           className="mr-1"
           checked={todo.priority === 3}
           onChange={() => setTodo({ ...todo, priority: 3 })}
-          id="high"
+          id="highRadio"
         />
-        <label htmlFor="high" className="mr-3 text-orange-600">
+        <label htmlFor="highRadio" className="mr-3 text-orange-600">
           High
         </label>
         <input
@@ -102,9 +103,9 @@ export default function Input({
           className="mr-1"
           checked={todo.priority === 2}
           onChange={() => setTodo({ ...todo, priority: 2 })}
-          id="medium"
+          id="mediumRadio"
         />
-        <label htmlFor="medium" className="mr-3 text-yellow-600">
+        <label htmlFor="mediumRadio" className="mr-3 text-yellow-600">
           Medium
         </label>
         <input
@@ -114,9 +115,9 @@ export default function Input({
           className="mr-1"
           checked={todo.priority === 1}
           onChange={() => setTodo({ ...todo, priority: 1 })}
-          id="low"
+          id="lowRadio"
         />
-        <label htmlFor="low" className="mr-3 text-green-600">
+        <label htmlFor="lowRadio" className="mr-3 text-green-600">
           Low
         </label>
       </div>
@@ -124,15 +125,16 @@ export default function Input({
         <button
           className="bg-green-600 pt-1 pb-1 pl-2 pr-2 rounded-sm hover:bg-green-500 mr-2"
           onClick={() => {
-            if (data.find((e) => e.id === todo.id)) {
-              setData([todo, ...data.filter((e) => e.id !== todo.id)]);
+            const savedData = getData();
+            if (savedData.find((e) => e.id === todo.id)) {
+              setData([todo, ...savedData.filter((e) => e.id !== todo.id)]);
             } else {
-              if (data.length > 0) {
-                todo.id = Math.max(...data.map((e) => e.id)) + 1;
+              if (savedData.length > 0) {
+                todo.id = Math.max(...savedData.map((e) => e.id)) + 1;
               } else {
                 todo.id = 1;
               }
-              setData([todo, ...data]);
+              setData([todo, ...savedData]);
             }
             setTodo(
               new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1)

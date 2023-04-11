@@ -60,8 +60,8 @@ export default function ControlCenter({
 
   const searchButtonClassName =
     searchInput !== ""
-      ? "w-1/12 bg-green-500 h-6 hover:bg-green-400 font-semibold"
-      : "w-1/12 bg-orange-500 h-6 hover:bg-orange-400 font-semibold";
+      ? "w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-4"
+      : "w-2/12 bg-orange-500 h-6 hover:bg-orange-400 font-semibold mr-4";
 
   return (
     <div
@@ -71,46 +71,15 @@ export default function ControlCenter({
         color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)",
       }}
     >
-      <div>
+      <div className="mb-4">
         <input
           type="text"
           value={searchInput}
-          className="w-11/12 border border-solid border-green-500 h-6 focus:outline-0 pl-1"
+          className="w-full border border-solid border-green-500 h-6 focus:outline-0 pl-1"
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button
-          className={searchButtonClassName}
-          onClick={(e) => {
-            if (searchInput === "") {
-              setFilter({
-                urgent: true,
-                high: true,
-                medium: true,
-                low: true,
-                done: true,
-                notDone: true,
-              });
-              setData(getData());
-              return;
-            }
-            const newData = [
-              ...data.filter(
-                (e) =>
-                  e.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-                  e.description
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase())
-              ),
-            ];
-            newData.sort((a, b) => b.id - a.id);
-            setData(newData);
-            setSearchInput("");
-          }}
-        >
-          {searchInput !== "" ? "Search" : "Clear result"}
-        </button>
       </div>
-      <div className="mt-2 flex justify-center">
+      <div className="mb-4 flex justify-center">
         <input
           type="checkbox"
           id="urgent"
@@ -172,7 +141,38 @@ export default function ControlCenter({
           In progress
         </label>
       </div>
-      <div className="mt-2 flex justify-center">
+      <div className="mb-2 flex justify-center">
+        <button
+          className={searchButtonClassName}
+          onClick={(e) => {
+            if (searchInput === "") {
+              setFilter({
+                urgent: true,
+                high: true,
+                medium: true,
+                low: true,
+                done: true,
+                notDone: true,
+              });
+              setData(getData());
+              return;
+            }
+            const newData = [
+              ...data.filter(
+                (e) =>
+                  e.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+                  e.description
+                    .toLowerCase()
+                    .includes(searchInput.toLowerCase())
+              ),
+            ];
+            newData.sort((a, b) => b.id - a.id);
+            setData(newData);
+            setSearchInput("");
+          }}
+        >
+          {searchInput !== "" ? "Search" : "Clear result"}
+        </button>
         <button
           className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-4"
           onClick={() => setDisplayInput("block")}
