@@ -1,4 +1,3 @@
-
 export default function DangerousDialog({
   children,
   display,
@@ -8,13 +7,12 @@ export default function DangerousDialog({
 }) {
   return (
     <div
-      className="w-fit border-2 rounded-md border-red-400 p-4 absolute"
+      className="w-fit border-2 rounded-md border-red-400 p-4 absolute left-1/3"
       style={{
         backgroundColor: `rgb(${bgColor}, ${bgColor}, ${bgColor})`,
         display: display,
-        left: "690px",
         top: "300px",
-        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)"
+        color: bgColor === 250 ? "rgb(30,30,30)" : "rgb(250,250,250)",
       }}
     >
       <p>{children}</p>

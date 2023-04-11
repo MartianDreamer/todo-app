@@ -143,6 +143,12 @@ export default function ControlCenter({
       </div>
       <div className="mb-2 flex justify-center">
         <button
+          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-4"
+          onClick={() => setDisplayInput("block")}
+        >
+          Add
+        </button>
+        <button
           className={searchButtonClassName}
           onClick={(e) => {
             if (searchInput === "") {
@@ -174,12 +180,6 @@ export default function ControlCenter({
           {searchInput !== "" ? "Search" : "Clear result"}
         </button>
         <button
-          className="w-2/12 bg-green-500 h-6 hover:bg-green-400 font-semibold mr-4"
-          onClick={() => setDisplayInput("block")}
-        >
-          Add
-        </button>
-        <button
           className="w-2/12 bg-blue-500 h-6 hover:bg-blue-400 font-semibold mr-4"
           onClick={() => {
             if (bgColor === 250) {
@@ -195,7 +195,9 @@ export default function ControlCenter({
           className="w-2/12 bg-red-500 h-6 hover:bg-red-400 font-semibold mr-2"
           onClick={() => setDisplayDlg("block")}
         >
-          Delete All
+          {data.filter((e) => e.isSelected).length === 0
+            ? "Delete All"
+            : "Delete Selected"}
         </button>
       </div>
     </div>

@@ -46,7 +46,11 @@ function App() {
   const handleMultipleDeleteConfirm = () => {
     const newData = getData();
     const deletedDataIds = data.filter((e) => e.isSelected).map((e) => e.id);
-    writeData([...newData.filter((e) => !deletedDataIds.includes(e.id))]);
+    if (deletedDataIds.length === 0) {
+      writeData([]);
+    } else {
+      writeData([...newData.filter((e) => !deletedDataIds.includes(e.id))]);
+    }
     setMDDisplayDlg("none");
   };
 
