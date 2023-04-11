@@ -47,10 +47,9 @@ function App() {
     const newData = getData();
     const deletedDataIds = data.filter((e) => e.isSelected).map((e) => e.id);
     if (deletedDataIds.length === 0) {
-      writeData([]);
-    } else {
-      writeData([...newData.filter((e) => !deletedDataIds.includes(e.id))]);
+      deletedDataIds.push(...data.map((e) => e.id));
     }
+    writeData([...newData.filter((e) => !deletedDataIds.includes(e.id))]);
     setMDDisplayDlg("none");
   };
 
