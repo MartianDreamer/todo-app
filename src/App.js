@@ -32,7 +32,8 @@ function App() {
   };
 
   const handleDlgConfirm = () => {
-    writeData([...data.filter((e) => e.id !== todo.id)]);
+    const newData = getData();
+    writeData([...newData.filter((e) => e.id !== todo.id)]);
     setTodo(new Todo("", "", false, new Date().toLocaleDateString("en-CA"), 1));
     setSDDisplayDlg("none");
   };
@@ -43,7 +44,9 @@ function App() {
   };
 
   const handleMultipleDeleteConfirm = () => {
-    writeData([...data.filter((e) => !e.isSelected)]);
+    const newData = getData();
+    const deletedDataIds = data.filter((e) => e.isSelected).map((e) => e.id);
+    writeData([...newData.filter((e) => !deletedDataIds.includes(e.id))]);
     setMDDisplayDlg("none");
   };
 
