@@ -193,7 +193,17 @@ export default function ControlCenter({
         </button>
         <button
           className="w-2/12 bg-red-500 h-6 hover:bg-red-400 font-semibold mr-2"
-          onClick={() => setDisplayDlg("block")}
+          onClick={() => {
+            setFilter({
+              urgent: true,
+              high: true,
+              medium: true,
+              low: true,
+              done: true,
+              notDone: true,
+            });
+            setDisplayDlg("block");
+          }}
         >
           {data.filter((e) => e.isSelected).length === 0
             ? "Delete All"
