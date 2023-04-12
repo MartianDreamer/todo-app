@@ -5,7 +5,6 @@ export default function Input({
   display,
   setDisplay,
   bgColor,
-  data,
   setData,
   todo,
   setTodo,
